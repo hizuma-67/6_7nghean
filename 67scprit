@@ -1,6 +1,7 @@
 -- [[ HỆ THỐNG LOADING SCREEN ]] --
 local CoreGui = game:GetService("CoreGui")
 local TweenService = game:GetService("TweenService")
+local RunService = game:GetService("RunService")
 
 -- Tạo UI Loading
 local LoadingGui = Instance.new("ScreenGui")
@@ -40,6 +41,15 @@ UIStroke.Color = Color3.fromRGB(160, 32, 240)
 UIStroke.Thickness = 2
 UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 UIStroke.Transparency = 1
+
+-- Hiệu ứng đổi màu viền (RGB)
+task.spawn(function()
+    while LoadingGui.Parent do
+        local t = tick()
+        UIStroke.Color = Color3.fromHSV(t % 5 / 5, 1, 1)
+        RunService.RenderStepped:Wait()
+    end
+end)
 
 -- Tiêu đề
 Title.Parent = MainFrame
@@ -113,6 +123,14 @@ local function StartLoading()
         TweenService:Create(Bar, TweenInfo.new(1, Enum.EasingStyle.Quart), {Size = UDim2.new(stage[1], 0, 1, 0)}):Play()
         task.wait(1.2)
     end
+    
+    -- Thêm hiệu ứng âm thanh "Ting" khi xong
+    local TingSound = Instance.new("Sound")
+    TingSound.SoundId = "rbxassetid://4590657391" 
+    TingSound.Volume = 2
+    TingSound.Parent = CoreGui
+    TingSound:Play()
+    game:GetService("Debris"):AddItem(TingSound, 2)
     
     task.wait(0.3)
     
