@@ -1,16 +1,14 @@
--- [[ HỆ THỐNG LOADING SCREEN ]] --
 local CoreGui = game:GetService("CoreGui")
 local TweenService = game:GetService("TweenService")
 local RunService = game:GetService("RunService")
 
--- Tạo UI Loading
+
 local LoadingGui = Instance.new("ScreenGui")
 local MainFrame = Instance.new("Frame")
 local UIStroke = Instance.new("UIStroke")
 local UICorner = Instance.new("UICorner")
 local Title = Instance.new("TextLabel")
 
--- Container chứa text status
 local StatusContainer = Instance.new("Frame")
 local StatusListLayout = Instance.new("UIListLayout")
 local Status = Instance.new("TextLabel")
@@ -24,7 +22,6 @@ LoadingGui.Name = "Loading_67Hub"
 LoadingGui.Parent = CoreGui
 LoadingGui.DisplayOrder = 999
 
--- Khung chính
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = LoadingGui
 MainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
@@ -35,14 +32,12 @@ MainFrame.BackgroundTransparency = 1
 UICorner.CornerRadius = UDim.new(0, 8)
 UICorner.Parent = MainFrame
 
--- Cài đặt viền màu
 UIStroke.Parent = MainFrame
 UIStroke.Color = Color3.fromRGB(160, 32, 240)
 UIStroke.Thickness = 2
 UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 UIStroke.Transparency = 1
 
--- Hiệu ứng đổi màu viền (RGB)
 task.spawn(function()
     while LoadingGui.Parent do
         local t = tick()
@@ -51,7 +46,6 @@ task.spawn(function()
     end
 end)
 
--- Tiêu đề
 Title.Parent = MainFrame
 Title.BackgroundTransparency = 1
 Title.Position = UDim2.new(0, 0, 0.15, 0)
@@ -62,7 +56,6 @@ Title.TextColor3 = Color3.fromRGB(160, 32, 240)
 Title.TextSize = 22
 Title.TextTransparency = 1
 
--- Container cho Trạng thái
 StatusContainer.Parent = MainFrame
 StatusContainer.BackgroundTransparency = 1
 StatusContainer.Position = UDim2.new(0, 0, 0.62, 0)
@@ -74,7 +67,6 @@ StatusListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
 StatusListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
 StatusListLayout.Padding = UDim.new(0, 8)
 
--- Dòng trạng thái (Đã bỏ Spinner bên trái)
 Status.Parent = StatusContainer
 Status.BackgroundTransparency = 1
 Status.Size = UDim2.new(0, 0, 1, 0)
@@ -85,7 +77,6 @@ Status.TextColor3 = Color3.fromRGB(180, 180, 180)
 Status.TextSize = 13
 Status.TextTransparency = 1
 
--- Khung nền của thanh tiến trình
 BarBackground.Parent = MainFrame
 BarBackground.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 BarBackground.Position = UDim2.new(0.1, 0, 0.48, 0)
@@ -95,7 +86,6 @@ BarBackground.BackgroundTransparency = 1
 BarBgCorner.CornerRadius = UDim.new(1, 0)
 BarBgCorner.Parent = BarBackground
 
--- Thanh chạy tiến trình
 Bar.Parent = BarBackground
 Bar.BackgroundColor3 = Color3.fromRGB(160, 32, 240)
 Bar.Size = UDim2.new(0, 0, 1, 0)
@@ -103,7 +93,6 @@ Bar.BorderSizePixel = 0
 BarCorner.CornerRadius = UDim.new(1, 0)
 BarCorner.Parent = Bar
 
--- Hiệu ứng Loading
 local function StartLoading()
     TweenService:Create(MainFrame, TweenInfo.new(0.5), {BackgroundTransparency = 0}):Play()
     TweenService:Create(UIStroke, TweenInfo.new(0.5), {Transparency = 0}):Play()
@@ -124,7 +113,6 @@ local function StartLoading()
         task.wait(1.2)
     end
     
-    -- Thêm hiệu ứng âm thanh "Ting" khi xong
     local TingSound = Instance.new("Sound")
     TingSound.SoundId = "rbxassetid://4590657391" 
     TingSound.Volume = 2
@@ -147,10 +135,6 @@ end
 
 StartLoading()
 
--------------------------------------------------------
--- [[ HỆ THỐNG CHÍNH - ĐÃ CẬP NHẬT FIX ]] --
--------------------------------------------------------
-
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
@@ -161,7 +145,6 @@ local HttpService = game:GetService("HttpService")
 local VirtualUser = game:GetService("VirtualUser")
 local PlaceID = game.PlaceId
 
--- [[ 0. HỆ THỐNG ANTI-BAN & ANTI-KICK LOCAL ]] --
 local mt = getrawmetatable(game)
 local oldIndex = mt.__index
 local oldNamecall = mt.__namecall
@@ -199,7 +182,6 @@ local hasClickedDiscord = false
 local AutoHopAdmin = false
 local isAFK = false
 
--- [[ 1. NÚT BẤM MỞ MENU (ĐÃ CẬP NHẬT SANG CHỮ TOGGLE) ]] --
 local ScreenGui = Instance.new("ScreenGui")
 local ToggleButton = Instance.new("TextButton") -- Đổi từ ImageButton sang TextButton
 local UICorner = Instance.new("UICorner")
@@ -214,7 +196,6 @@ ToggleButton.Size = UDim2.new(0, 60, 0, 30) -- Điều chỉnh lại kích thư�
 ToggleButton.Draggable = true
 ToggleButton.Active = true
 
--- Thiết lập phần chữ
 ToggleButton.Text = "Toggle"
 ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255) -- Màu trắng
 ToggleButton.Font = Enum.Font.GothamBold
@@ -222,7 +203,6 @@ ToggleButton.TextSize = 14
 
 UICorner.Parent = ToggleButton
 
--- [[ 2. KHỞI TẠO MENU ]] --
 local Window = Fluent:CreateWindow({
     Title = "6_7 Hub",
     SubTitle = "Premium Edition 2026",
@@ -254,7 +234,6 @@ local function SafeLoad(url, name)
     end
 end
 
--- [[ 3. TAB THÔNG TIN ]] --
 local Section_Profile = Tabs.Main:AddSection("Hồ Sơ Của Bạn")
 local TimeParagraph = Tabs.Main:AddParagraph({
     Title = "Thời Gian Hệ Thống",
@@ -294,7 +273,6 @@ Tabs.Main:AddButton({
     end
 })
 
--- [[ 4. TAB CHỨC NĂNG GAME ]] --
 local Section_Game = Tabs.Game:AddSection("Script Phù Hợp")
 
 if PlaceID == 10449761463 then
@@ -312,7 +290,6 @@ else
     Tabs.Game:AddButton({ Title = "Infinite Yield (Lệnh Admin)", Callback = function() SafeLoad("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source", "Infinite Yield") end })
 end
 
--- [[ 6. TAB CÀI ĐẶT & BẢO VỆ ]] --
 local Section_Protection = Tabs.Settings:AddSection("Bảo Vệ Tài Khoản")
 
 local isLoadingToggles = true
@@ -334,7 +311,6 @@ Player.Idled:Connect(function()
     end
 end)
 
--- Auto Hop Admin Toggle
 local ToggleAutoHop = Tabs.Settings:AddToggle("AutoHopAdminToggle", { Title = "Auto Hop Khi Có Admin/Dev", Default = false })
 ToggleAutoHop:OnChanged(function(Value)
     AutoHopAdmin = Value
